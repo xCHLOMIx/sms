@@ -1,0 +1,199 @@
+{% extends "main.html" %}
+{% block content %}
+<title>SMS - Home</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    main {
+        max-width: 1000px;
+        width: 100%;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #272727;
+        border-radius: 20px;
+        padding: 15px;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    nav h2 {
+        color: white;
+        font-weight: 500;
+    }
+
+    nav button {
+        cursor: pointer;
+        background: none;
+        border: 1px dashed #272727;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 10px;
+        transition: .3s ease;
+    }
+
+    nav button:hover {
+        border: 1px solid #9D9F9F;
+    }
+
+    /* .container {
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } */
+
+    .container {
+        margin-top: 15px;
+        color: white;
+        border-radius: 5px;
+        height: 90%;
+    }
+
+    .container .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .container .header button {
+        cursor: pointer;
+        background: #4B4BAC;
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 10px;
+        transition: .3s ease;
+    }
+
+    .container .products {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        overflow: scroll;
+    }
+
+    .products::-webkit-scrollbar {
+        display: none;
+    }
+
+    .container .products .product {
+        height: max-content;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #272727;
+        width: max-content;
+        padding: 5px 5px 4px 5px;
+        position: relative;
+        background: none;
+        transition: .3s ease;
+    }
+
+    .container .products .code {
+        background: #1B6C13;
+        padding: 5px 13px;
+        border-radius: 5px;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .product .btns {
+        display: flex;
+        gap: 3px;
+    }
+
+    .product .btns button {
+        cursor: pointer;
+        background: none;
+        border: 1px solid #272727;
+        padding: 5px 5px 1px 5px;
+        border-radius: 5px;
+    }
+
+    #delete {
+        background: #895424;
+    }
+</style>
+</head>
+
+<body>
+    <main>
+        {% include "nav.html" %}
+        <div class="container">
+            <div class="header">
+                <a href={% url "home" %}>
+                    <div class="title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12.5 11.5L7.5 6.5M7.5 6.5L2.5 11.5M7.5 6.5V14.3C7.5 15.4201 7.5 15.9798 7.71799 16.4076C7.90973 16.7839 8.21547 17.0905 8.5918 17.2822C9.0192 17.5 9.57899 17.5 10.6969 17.5H20.5002"
+                                stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>All products</span>
+                    </div>
+                </a>
+                <a href={% url "add-product" %}>
+                    <button>+ Add product</button>
+                </a>
+            </div>
+            <div class="products">
+                {% for product in products %}
+                <div class="product">
+                    <div class="code">
+                        <span>{{ product.code }}</span>
+                    </div>
+                    <div class="name">
+                        <span>{{ product.name }}</span>
+                    </div>
+                    <div class="btns">
+                        <a href={% url "update-product" product.code %}>
+                            <button id="edit">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_221_222)">
+                                        <path
+                                            d="M1.11133 14.4447V18.8891L5.55577 18.8891L17.632 6.81285L17.633 6.8119C18.0724 6.37251 18.2922 6.15273 18.3745 5.89922C18.447 5.67606 18.4471 5.43567 18.3746 5.21252C18.2921 4.95882 18.072 4.7387 17.632 4.29869L15.6989 2.36558C15.2608 1.92744 15.0412 1.70793 14.7881 1.62567C14.5649 1.55316 14.3245 1.55316 14.1014 1.62567C13.848 1.70798 13.6283 1.92775 13.1895 2.36651L13.1876 2.3684L1.11133 14.4447Z"
+                                            stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_221_222">
+                                            <rect width="20" height="20" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </button>
+                        </a>
+                        <a href={% url "delete-product" product.code %}>
+                            <button id="delete">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4 4V15.8C4 16.9201 4 17.4798 4.21799 17.9076C4.40973 18.2839 4.71547 18.5905 5.0918 18.7822C5.5192 19 6.07899 19 7.19691 19H12.8031C13.921 19 14.48 19 14.9074 18.7822C15.2837 18.5905 15.5905 18.2839 15.7822 17.9076C16 17.4802 16 16.921 16 15.8031V4M4 4H6M4 4H2M6 4H14M6 4C6 3.06812 6 2.60241 6.15224 2.23486C6.35523 1.74481 6.74432 1.35523 7.23438 1.15224C7.60192 1 8.06812 1 9 1H11C11.9319 1 12.3978 1 12.7654 1.15224C13.2554 1.35523 13.6447 1.74481 13.8477 2.23486C13.9999 2.6024 14 3.06812 14 4M14 4H16M16 4H18"
+                                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+    </main>
+</body>
+
+</html>
+{% endblock content %}

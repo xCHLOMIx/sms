@@ -1,0 +1,156 @@
+{% extends "main.html" %}
+{% block content %}
+<title>SMS - Home</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    main {
+        max-width: 1000px;
+        width: 100%;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        height: max-content;
+        border: 1px solid #272727;
+        border-radius: 20px;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+    }
+
+    nav h2 {
+        color: white;
+        font-weight: 500;
+    }
+
+    nav button {
+        cursor: pointer;
+        background: none;
+        border: 1px dashed #272727;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 10px;
+        transition: .3s ease;
+    }
+
+    nav button:hover {
+        border: 1px solid #9D9F9F;
+    }
+
+    /* .container {
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } */
+
+    .links {
+        height: 200px;
+        margin: 130px 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .links a {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-height: 200px;
+        height: 100%;
+        width: 100%;
+        max-width: 200px;
+        border: 1px solid #272727;
+        padding: 20px;
+        color: #9D9F9F;
+        transition: .3s;
+    }
+
+    .links a:hover {
+        border: 1px solid #C5C5C5;
+    }
+
+    .link span {
+        position: absolute;
+        bottom: 15px;
+        left: 20px;
+        font-weight: 200;
+    }
+
+    #link-1 {
+        border-radius: 15px 0px 0px 15px;
+    }
+
+    #link-3 {
+        border-radius: 0px 15px 15px 0px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>
+</head>
+
+<body>
+    <main>
+        {% include "nav.html" %}
+        <div class="links">
+            <a href={% url "inventory" %} id="link-1">
+                <div class="link">
+                    <svg width="80" height="59" viewBox="0 0 80 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="path-1-inside-1_198_73" fill="white">
+                            <rect width="80" height="15" rx="1" />
+                        </mask>
+                        <rect width="80" height="15" rx="1" stroke="#895424" stroke-width="4"
+                            mask="url(#path-1-inside-1_198_73)" />
+                        <mask id="path-2-inside-2_198_73" fill="white">
+                            <path d="M4 13H77V58C77 58.5523 76.5523 59 76 59H5C4.44772 59 4 58.5523 4 58V13Z" />
+                        </mask>
+                        <path d="M4 13H77V58C77 58.5523 76.5523 59 76 59H5C4.44772 59 4 58.5523 4 58V13Z" stroke="#895424"
+                            stroke-width="4" mask="url(#path-2-inside-2_198_73)" />
+                        <line x1="35" y1="20.5" x2="46" y2="20.5" stroke="#895424" />
+                    </svg>
+                    <span>Inventory</span>
+                </div>
+            </a>
+            <a href= id="link-2">
+                <div class="link" id="link-2">
+                    <svg width="49" height="59" viewBox="0 0 49 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect y="15.3398" width="13" height="43.66" rx="4" fill="#4B4BAD" />
+                        <rect x="18" y="29.5" width="13" height="29.5" rx="4" fill="#4B4BAD" />
+                        <rect x="36" width="13" height="59" rx="4" fill="#4B4BAD" />
+                    </svg>
+    
+                    <span>Reports</span>
+                </div>
+            </a>
+            <a href= id="link-3">
+                <div class="link" id="link-3">
+                    <svg width="65" height="34" viewBox="0 0 65 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M62.878 11.2269H1V9.22687H60.878L53.3583 1.70718L54.7725 0.292969L64.2922 9.81266L62.878 11.2269Z"
+                            fill="#1B6C13" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M2.12154 22.3327L63.9995 22.3327V24.3327L4.12154 24.3327L11.6412 31.8524L10.227 33.2666L0.707325 23.7469L2.12154 22.3327Z"
+                            fill="#1B6C13" />
+                    </svg>
+                    <span>Transactions</span>
+                </div>
+            </a>
+        </div>
+    </main>
+</body>
+
+</html>
+{% endblock content %}
