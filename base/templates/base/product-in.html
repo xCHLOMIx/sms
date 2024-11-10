@@ -1,0 +1,291 @@
+{% extends "main.html" %}
+{% block content %}
+<title>SMS - Home</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    main {
+        max-width: 1000px;
+        width: 100%;
+        height: max-content;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #272727;
+        border-radius: 20px;
+        padding: 15px;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    nav h2 {
+        color: white;
+        font-weight: 500;
+    }
+
+    nav button {
+        cursor: pointer;
+        background: none;
+        border: 1px dashed #272727;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 10px;
+        transition: .3s ease;
+    }
+
+    nav button:hover {
+        border: 1px solid #9D9F9F;
+    }
+
+    /* .container {
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } */
+
+    .container {
+        margin-top: 15px;
+        color: white;
+        border-radius: 5px;
+        height: 90%;
+    }
+
+    .container .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .container .header button {
+        cursor: pointer;
+        background: #4B4BAC;
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 10px;
+        transition: .3s ease;
+    }
+
+    .container .products {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        overflow: scroll;
+        height: 100%;
+    }
+
+    .products::-webkit-scrollbar {
+        display: none;
+    }
+
+    .container .products .product {
+        height: max-content;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #272727;
+        width: max-content;
+        padding: 5px 5px 4px 5px;
+        position: relative;
+        background: none;
+        transition: .3s ease;
+    }
+
+    .container .products .code {
+        background: #1B6C13;
+        padding: 5px 13px;
+        border-radius: 5px;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .product .btns {
+        display: none;
+        gap: 3px;
+    }
+
+    .product:hover .btns {
+        display: flex;
+    }
+
+    .product .btns button {
+        cursor: pointer;
+        background: none;
+        border: 1px solid #272727;
+        padding: 5px 5px 1px 5px;
+        border-radius: 5px;
+    }
+
+    .form {
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    h1 {
+        color: white;
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .input {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    label {
+        color: #9D9F9F;
+    }
+
+    .input input {
+        outline: none;
+        color: white;
+        background: none;
+        padding: 13px;
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid #272727;
+    }
+
+    .input select {
+        outline: none;
+        color: white;
+        background: none;
+        padding: 13px;
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid #272727;
+    }
+
+    option {
+        color: black;
+        background: transparent;
+    }
+
+    form button {
+        cursor: pointer;
+        padding: 13px;
+        background: #4B4BAC;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        color: white;
+        transition: .3s;
+    }
+
+    form span {
+        color: #bd3804;
+    }
+
+    .option {
+        display: flex;
+        margin-top: 15px;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .option button{
+        cursor: pointer;
+        padding: 13px 15px;
+        background: none;
+        border: none;
+        border-radius: 10px;
+        font-weight: 500;
+        color: white;
+        transition: .3s;
+    }
+
+    .option button:hover {
+        background: #272727;
+    }
+
+    #active {
+        background: #4B4BAC;
+    }
+</style>
+</head>
+
+<body>
+    <main>
+        {% include "nav.html" %}
+        <div class="container">
+            <div class="header">
+                <a href={% url "home" %}>
+                    <div class="title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12.5 11.5L7.5 6.5M7.5 6.5L2.5 11.5M7.5 6.5V14.3C7.5 15.4201 7.5 15.9798 7.71799 16.4076C7.90973 16.7839 8.21547 17.0905 8.5918 17.2822C9.0192 17.5 9.57899 17.5 10.6969 17.5H20.5002"
+                                stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Transactions</span>
+                    </div>
+                </a>
+            </div>
+            <div class="option">
+                <a href={% url "product-in" %}>
+                    <button id="active">Stock in</button>
+                </a>
+                <a href={% url "product-out" %}>
+                    <button>Stock out</button>
+                </a>
+            </div>
+            <div class="products">
+                <div class="form">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="input">
+                            {% if error %}
+                            <span>{{ error }}</span>
+                            {% endif %}
+                            <label for="">
+                                Product:
+                            </label>
+                            <select name="code" id="">
+                                {% for product in products  %}
+                                    <option value="{{ product.code }}">{{ product.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="input">
+                            <label for="">
+                                Quantinty:
+                            </label>
+                            <input type="number" name="quantity" placeholder="Example: 10" required>
+                        </div>
+                        <div class="input">
+                            <label for="">
+                                Unit Price (rwf):
+                            </label>
+                            <input type="number" name="unitPrice" placeholder="Example: 2000" required>
+                        </div>
+                        <button>Add product</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
+{% endblock content %}
