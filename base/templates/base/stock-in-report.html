@@ -194,7 +194,7 @@
                         </svg>
                         <span>Transactions</span>
                     </div>
-                    <a href={% url "product-out" %}>
+                    <a href={% url "product-in" %}>
                         <button>Perform transaction</button>
                     </a>
                 </a>
@@ -222,8 +222,8 @@
                         {% for product in transactions %}
                         <tr id="noice">
                             <td>{{ product.code }}</td>
-                            <td>{{ product.quantity }}</td>
                             <td>{{ product.dateTime }}</td>
+                            <td>{{ product.quantity }}</td>
                             <td>{{ product.unitPrice }}</td>
                             <td>{{ product.totalPrice }}</td>
                         </tr>

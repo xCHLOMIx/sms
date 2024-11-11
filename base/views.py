@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .models import *
@@ -69,30 +69,40 @@ def productInView(request):
 
     if request.method == 'POST':
         code = Product.objects.get(code = request.POST['code'])
-        quantity = request.POST['quantity']
-        unitPrice = request.POST['unitPrice']
-        totalPrice = unitPrice * quantity
+        quantity = int(request.POST['quantity'])
+        unitPrice = int(request.POST['unitPrice'])
 
-        prodcutIn = ProductIn(code = code, quantity = quantity, unitPrice = unitPrice, totalPrice = totalPrice)
-        prodcutIn.save()
+        try:
+            product = ProductIn.objects.get(code = code)
+            product.quantity += quantity
+            product.unitPrice = product.unitPrice 
 
-        redirect('inventory')
-    return render(request, 'base/product-in.html', { "products" : products})
+            product.save() 
+        except ProductIn.DoesNotExist:
+            productIn = ProductIn(code = code, quantity = quantity, unitPrice = unitPrice)
+            productIn.save()
+
+        return redirect('stock-in-report')
+    return render(request, 'base/product-in.html', { "products" : products })
 
 @login_required(login_url = 'login')
 def productOutView(request):
-    products =  Product.objects.all()
+    products =  ProductIn.objects.all()
 
     if request.method == 'POST':
         code = Product.objects.get(code = request.POST['code'])
         quantity = int(request.POST['quantity'])
-        unitPrice = int(request.POST['unitPrice'])
-        totalPrice = unitPrice * quantity
+        productIn = get_object_or_404(ProductIn, code = code)
 
-        prodcutOut = ProductOut(code = code, quantity = quantity, unitPrice = unitPrice, totalPrice = totalPrice)
-        prodcutOut.save()
+        unitPrice = productIn.unitPrice
 
-        redirect('inventory')
+        productIn.quantity = int(productIn.quantity) - quantity
+        productIn.save()
+
+        productOut = ProductOut(code = code, quantity = quantity, unitPrice = unitPrice)
+        productOut.save()
+
+        return redirect('stock-out-report')
 
     return render(request, 'base/product-out.html', { "products" : products })
 
